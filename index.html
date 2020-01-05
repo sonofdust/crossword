@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @import url("styles.css");
+    </style>
+</head>
+
+<body>
+
+    <div class="grid">
+    </div>
+
+    <div id='smtWord'>
+        Enter word: <input id='wordInput' type="text" name="fname">
+        <button id="inputBtn">Submit</button>
+    </div>
+    <div>
+        Show solution:<input type="checkbox" name="solution" value="Show">
+    </div>
+</body>
+
+</html>
+<script type='module'>
+//    import { getRandomPoint, setWord, getWord, deleteWord, addPoint, randomDirectionKey, directions } from './solutionPoints.js'
+    import { initMatrix, addWord } from './PlotPoints.js'
+    const length = 15;
+    const width = 15;
+
+    const bindInput = () => {
+        document.querySelector('#inputBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            try {
+                addWord(document.querySelector('#wordInput').value.toUpperCase());
+
+            } catch (e) { }
+            document.querySelector('#wordInput').value = '';
+        });
+    };
+
+    // const ramdomizeGrid = () => {
+    //     const cells = document.querySelectorAll('.cell');
+    //     cells.forEach((item) => {
+    //         item.innerHTML = rdmChar();
+    //         item.addEventListener('click', (e) => {
+    //             e.preventDefault();
+    //             console.log(e.target.id, e.target.innerHTML);
+    //         });
+    //     })
+    // };
+
+
+    initMatrix(document.querySelector('.grid'), length, width);    
+    bindInput();
+
+</script>
