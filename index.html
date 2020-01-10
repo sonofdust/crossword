@@ -23,12 +23,15 @@
     <div>
         Show solution:<input type="checkbox" name="solution" value="Show">
     </div>
+    <div id='divParent'>
+
+    </div>
 </body>
 
 </html>
 <script type='module'>
-//    import { getRandomPoint, setWord, getWord, deleteWord, addPoint, randomDirectionKey, directions } from './solutionPoints.js'
-    import { initMatrix, addWord } from './PlotPoints.js'
+    //    import { getRandomPoint, setWord, getWord, deleteWord, addPoint, randomDirectionKey, directions } from './solutionPoints.js'
+    import { initMatrix, addWord, getWords, removeWord } from './PlotPoints.js'
     const length = 15;
     const width = 15;
 
@@ -36,8 +39,15 @@
         document.querySelector('#inputBtn').addEventListener('click', (e) => {
             e.preventDefault();
             try {
-                addWord(document.querySelector('#wordInput').value.toUpperCase());
+                let word = document.querySelector('#wordInput').value.toUpperCase();
+                if (!getWords().filter(item => item == word).length && word.split(' ').length == 1) {
+                    addWord(word);
+                    addToList(word);
+                }
+                else { alert(`Cannot have repeating words or compound words with spaces.`); }
 
+                //                console.log(getWords());
+                writeList(getWords());
             } catch (e) { }
             document.querySelector('#wordInput').value = '';
         });
@@ -53,9 +63,62 @@
     //         });
     //     })
     // };
+    //*************************************************************************************
+
+    const remove = (e) => {
+        e.preventDefault();
+        const parent = document.getElementById(e.target.value);
+        const button = document.getElementById(e.target.id);
+        button.removeEventListener('click', remove);
+        button.remove();
+        //        wordList = wordList.filter(item => item != parent.innerText);
+        const promise = new Promise(function (resolve, reject) {
+            try {
+                removeWord(parent.innerText);
+                resolve("Success");
+            } catch (e) {
+                reject(e.message);    
+            }
+        });
+        promise.then((message)=>{parent.remove();}).catch();
+        
+    };
+
+    const addToList = (word) => {
+        const randomKey = () => {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const random = (seed) => Math.floor(Math.random() * seed);
+            let key = '';
+            while (key.length <= 10) { key += chars.charAt(random(chars.length)); }
+            return key;
+        }
+        const key = randomKey();
+        const div = document.createElement("div");
+        div.setAttribute('class', 'DivChild');
+        div.setAttribute('id', `div-${key}`);
+
+        const btn = document.createElement("button");
+        btn.setAttribute('class', 'btnDelete');
+        btn.setAttribute('value', `div-${key}`);
+        btn.setAttribute('id', `btn-${key}`);
+        btn.addEventListener('click', remove);
+
+        btn.appendChild(document.createTextNode("X"));
+        div.appendChild(btn);
+
+        const node = document.createTextNode(word);
+        div.appendChild(node);
+
+        const element = document.getElementById("divParent");
+        element.appendChild(div);
+        // wordList = [...wordList.filter(item => item != word), word];
+        // console.log(wordList);
+    }
 
 
-    initMatrix(document.querySelector('.grid'), length, width);    
+    //*************************************************************************************
+
+    initMatrix(document.querySelector('.grid'), length, width);
     bindInput();
 
 </script>

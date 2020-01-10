@@ -20,6 +20,8 @@ export default class MatrixPoints extends Matrix {
 
     getWord(word) { return this.words[word] };
 
+    getWords() { return Object.keys(this.words) };
+
     deleteWord(word) {
         delete this.words[word];
     }

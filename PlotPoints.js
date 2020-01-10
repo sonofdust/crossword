@@ -1,11 +1,13 @@
 import MatrixPoints from './Points.js'
 
-
-
 let mtx = {};
 const initMatrix = (element, length, width) => { mtx = new MatrixPoints(element, length, width) };
+const removeWord = (word) => {
+    console.log(getWord(word));
+//    mtx.deleteWord(word);   
+}
 
-
+const getWords = () => mtx.getWords();
 const addWord = (word) => {
     mtx.setWord(word);
 
@@ -55,5 +57,5 @@ const addWord = (word) => {
     }
 }
 
-export { initMatrix, addWord };
+export { initMatrix, addWord, getWords, removeWord };
 
