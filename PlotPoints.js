@@ -3,8 +3,18 @@ import MatrixPoints from './Points.js'
 let mtx = {};
 const initMatrix = (element, length, width) => { mtx = new MatrixPoints(element, length, width) };
 const removeWord = (word) => {
-    console.log(getWord(word));
-//    mtx.deleteWord(word);   
+    console.log(mtx);
+
+    console.log(mtx.getWord(word));
+    mtx.getWord(word).forEach(item => {
+        let char = mtx.getChar();
+        mtx.matrix[item.x][item.y].isSet = false;
+        mtx.matrix[item.x][item.y].char = char;
+        let el = document.getElementById(`${item.x}-${item.y}`);
+        el.innerText = char;
+        el.className = "cell"; 
+    });
+    mtx.deleteWord(word);
 }
 
 const getWords = () => mtx.getWords();

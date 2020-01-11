@@ -72,16 +72,17 @@
         button.removeEventListener('click', remove);
         button.remove();
         //        wordList = wordList.filter(item => item != parent.innerText);
-        const promise = new Promise(function (resolve, reject) {
-            try {
-                removeWord(parent.innerText);
-                resolve("Success");
-            } catch (e) {
-                reject(e.message);    
-            }
-        });
-        promise.then((message)=>{parent.remove();}).catch();
-        
+        // const promise = new Promise(function (resolve, reject) {
+        //     try {
+        //         removeWord(parent.innerText);
+        //         resolve("Success");
+        //     } catch (e) {
+        //         reject(e.message);    
+        //     }
+        // });
+        // promise.then((message)=>{parent.remove();}).catch();
+        removeWord(parent.innerText);
+        parent.remove();
     };
 
     const addToList = (word) => {

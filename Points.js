@@ -5,7 +5,7 @@ export default class MatrixPoints extends Matrix {
         super(element, length, width);
         this.words = {};
     }
-
+    getChar() { return this.randomChar(); }
 
     getRandomPoint(length, width) {
         return {
