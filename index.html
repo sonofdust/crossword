@@ -20,17 +20,15 @@
         Enter word: <input id='wordInput' type="text" name="fname">
         <button id="inputBtn">Submit</button>
     </div>
-    <div>
-        Show solution:<input type="checkbox" name="solution" value="Show">
+    <div class='container'>
+        <div id='divParent'>
+        </div>
     </div>
-    <div id='divParent'>
 
-    </div>
 </body>
 
 </html>
 <script type='module'>
-    //    import { getRandomPoint, setWord, getWord, deleteWord, addPoint, randomDirectionKey, directions } from './solutionPoints.js'
     import { initMatrix, addWord, getWords, removeWord } from './PlotPoints.js'
     const length = 15;
     const width = 15;
@@ -45,25 +43,17 @@
                     addToList(word);
                 }
                 else { alert(`Cannot have repeating words or compound words with spaces.`); }
-
-                //                console.log(getWords());
                 writeList(getWords());
             } catch (e) { }
             document.querySelector('#wordInput').value = '';
         });
+        // document.getElementById("wordInput").addEventListener("keypress", e => {
+        //     if (e.keyCode == 13) {
+        //         alert(document.getElementById("wordInput").innerText);
+        //         alert(e.target.innerText);
+        //     }
+        // });
     };
-
-    // const ramdomizeGrid = () => {
-    //     const cells = document.querySelectorAll('.cell');
-    //     cells.forEach((item) => {
-    //         item.innerHTML = rdmChar();
-    //         item.addEventListener('click', (e) => {
-    //             e.preventDefault();
-    //             console.log(e.target.id, e.target.innerHTML);
-    //         });
-    //     })
-    // };
-    //*************************************************************************************
 
     const remove = (e) => {
         e.preventDefault();
@@ -71,16 +61,6 @@
         const button = document.getElementById(e.target.id);
         button.removeEventListener('click', remove);
         button.remove();
-        //        wordList = wordList.filter(item => item != parent.innerText);
-        // const promise = new Promise(function (resolve, reject) {
-        //     try {
-        //         removeWord(parent.innerText);
-        //         resolve("Success");
-        //     } catch (e) {
-        //         reject(e.message);    
-        //     }
-        // });
-        // promise.then((message)=>{parent.remove();}).catch();
         removeWord(parent.innerText);
         parent.remove();
     };

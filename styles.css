@@ -4,8 +4,15 @@ td {
     height: 20px;
     align-content: center;
   }
-  
-  
+
+  .btnDelete{
+    cursor: pointer;
+  }
+
+  .container{
+    padding: 10px;
+  }
+
   .cell {
     cursor: pointer;
     display: block;
