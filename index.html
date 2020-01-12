@@ -17,7 +17,10 @@
     </div>
 
     <div id='smtWord'>
-        Enter word: <input id='wordInput' type="text" name="fname">
+        <div class="tooltip">Enter Word:
+            <span class="tooltiptext">Type in word and hit enter or type word and press submit button.</span>
+        </div>
+        <input id='wordInput' type="text" name="fname">
         <button id="inputBtn">Submit</button>
     </div>
     <div class='container'>
@@ -47,10 +50,12 @@
             } catch (e) { }
             document.querySelector('#wordInput').value = '';
         });
+
         // document.getElementById("wordInput").addEventListener("keypress", e => {
         //     if (e.keyCode == 13) {
-        //         alert(document.getElementById("wordInput").innerText);
-        //         alert(e.target.innerText);
+        //         e.preventDefault();
+        //         addToList(e.target.value);
+        //         e.target.value = '';
         //     }
         // });
     };
