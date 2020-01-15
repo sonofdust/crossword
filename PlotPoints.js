@@ -1,21 +1,35 @@
 import MatrixPoints from './Points.js'
 
 let mtx = {};
-const initMatrix = (element, length, width) => { mtx = new MatrixPoints(element, length, width) };
+const initMatrix = (length, width) => { mtx = new MatrixPoints(length, width); };
 const removeWord = (word) => {
-    console.log(mtx);
-
-    console.log(mtx.getWord(word));
     mtx.getWord(word).forEach(item => {
         let char = mtx.getChar();
         mtx.matrix[item.x][item.y].isSet = false;
         mtx.matrix[item.x][item.y].char = char;
         let el = document.getElementById(`${item.x}-${item.y}`);
         el.innerText = char;
-        el.className = "cell"; 
+        el.className = "cell";
     });
     mtx.deleteWord(word);
 }
+
+const loadGrid = (element) => {
+    
+    let htmlTxt = '';
+    htmlTxt += `<table>`;
+    Object.keys(mtx.matrix).forEach(xdx => {
+        htmlTxt += `<tr>`;
+        Object.keys(mtx.matrix[xdx]).forEach(ydx => {
+            htmlTxt += `<td><div class = ${(mtx.matrix[xdx][ydx].isSet) ? 'slctcell' : 'cell'} id='${xdx}-${ydx}''>${mtx.matrix[xdx][ydx].char}</div></td>`;
+        })
+        htmlTxt += `</tr>`;
+    });
+    htmlTxt += `</table>`;
+    element.innerHTML = htmlTxt;
+};
+
+
 
 const getWords = () => mtx.getWords();
 const addWord = (word) => {
@@ -57,15 +71,15 @@ const addWord = (word) => {
                 mtx.matrix[item.x][item.y].char = word.charAt(index);
                 mtx.matrix[item.x][item.y].isSet = true;
             })
-            mtx.loadGrid();
+            loadGrid(document.querySelector('.grid'));
         } catch (e) {
-            alert('Could not place word in grid');
+            alert('Could not place word in grid. inner');
         }
     } else {
         delete mtx.deleteWord(word);
-        alert('Could not place word in grid');
+        alert('Could not place word in grid. outter');
     }
 }
 
-export { initMatrix, addWord, getWords, removeWord };
+export { initMatrix, addWord, getWords, removeWord, loadGrid };
 

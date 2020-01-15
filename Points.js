@@ -1,8 +1,8 @@
 import Matrix from './Matrix.js'
 
 export default class MatrixPoints extends Matrix {
-    constructor(element, length, width) {
-        super(element, length, width);
+    constructor(length, width) {
+        super(length, width);
         this.words = {};
     }
     getChar() { return this.randomChar(); }
