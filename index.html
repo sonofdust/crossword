@@ -28,10 +28,9 @@
 
 </html>
 <script type='module'>
-    import { initMatrix, addWord, getWords, removeWord } from './PlotPoints.js'
+    import { initMatrix, addWord, getWords, removeWord, loadGrid } from './PlotPoints.js'
     const length = 15;
     const width = 15;
-
     const bindInput = () => {
         document.querySelector('#inputBtn').addEventListener('click', (e) => {
             e.preventDefault();
@@ -93,14 +92,13 @@
 
         const element = document.getElementById("divParent");
         element.appendChild(div);
-        // wordList = [...wordList.filter(item => item != word), word];
-        // console.log(wordList);
     }
 
 
     //*************************************************************************************
 
-    initMatrix(document.querySelector('.grid'), length, width);
+    initMatrix( length, width);
+    loadGrid(document.querySelector('.grid'));
     bindInput();
 
 </script>
